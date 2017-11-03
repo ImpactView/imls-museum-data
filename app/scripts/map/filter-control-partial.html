@@ -1,0 +1,6 @@
+<span>NTEE Org Type:</span>
+<select
+    ng-change="fc.onFilterOptionChanged()"
+    ng-model="fc.filterValue"
+    ng-options="item as item.name for item in fc.options track by item.name">
+</select>

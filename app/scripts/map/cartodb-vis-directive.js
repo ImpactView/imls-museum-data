@@ -34,6 +34,7 @@
         function initialize() {
             ctl.demographics = !!($scope.$eval($attrs.demographics));
             ctl.drawControl = !!($scope.$eval($attrs.drawControl));
+            ctl.filterControl = !!($scope.$eval($attrs.filterControl));
             ctl.visFullscreenClass = $attrs.visFullscreenClass || 'map-expanded';
             ctl.sublayers = [];
             ctl.radio = '-1';
@@ -165,6 +166,8 @@
                 // demographics: bool, should the demographics layers be shown on the map
                 //                     default: false
                 // drawControl: bool, should the area analysis draw control be shown on the map
+                //                     default: false
+                // filterControl: bool, should the vis filter control be shown on the map
                 //                     default: false
             },
             templateUrl: 'scripts/map/cartodb-vis-partial.html',
