@@ -33,7 +33,7 @@
         initialize();
 
         function initialize() {
-            var options = Config.cartodb.legend.data;
+            var options = _.cloneDeep(Config.cartodb.legend.data);
             options.splice(0, 0, noneValue);
             ctl.options = options;
             ctl.filterValue = noneValue;
