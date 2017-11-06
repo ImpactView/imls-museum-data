@@ -1,4 +1,3 @@
-
 (function() {
     'use strict';
 
@@ -13,11 +12,11 @@
         bounds: {
             northEast: {
                 lat: 40.137992,
-                lng: -75.280266
+                lng: -74.955763
             },
             southWest: {
                 lat: 39.867004,
-                lng: -74.955763
+                lng: -75.280266
             }
         },
         detailZoom: 14,
@@ -38,16 +37,24 @@
                 data: [
                     { name: 'Human Services', value: '#5F4690'},
                     { name: 'Education', value: '#1D6996'},
-                    { name: 'Arts, Culture and Humanities', value: '#38A6A5'},
+                    { name: 'Arts, Culture, and Humanities', value: '#38A6A5'},
                     { name: 'Public, Societal Benefit', value: '#0F8554'},
                     { name: 'Health', value: '#73AF48'},
                     { name: 'Religion Related', value: '#EDAD08'},
                     { name: 'Environment and Animals', value: '#E17C05'},
                     { name: 'International, Foreign Affairs', value: '#CC503E'},
                     { name: 'Unknown, Unclassified', value: '#94346E'},
-                    { name: 'Mutual/Membership Benefit', value: '#6F4070'},
-                    { name: 'Others', value: '#666666'}
+                    { name: 'Mutual/Membership Benefit', value: '#6F4070'}
                 ]
+            }
+        },
+        fields: {
+            address: {
+                line1: 'org_address1_new',
+                line2: 'org_address2_new',
+                city: 'org_city_new',
+                state: 'org_state_new',
+                zip: 'org_zip_new'
             }
         },
         // :site: will be replaced with each value of socialSites, set to null if no social data
@@ -75,4 +82,3 @@
     .constant('Config', config);
 
 })();
-
