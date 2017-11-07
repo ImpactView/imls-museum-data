@@ -1,0 +1,2 @@
+<p ng-if="ivm.mission.length && ivm.expanded">{{ ivm.mission }} <a ng-click="ivm.expanded = !ivm.expanded">Less</a></p>
+<p ng-if="ivm.mission.length && !ivm.expanded">{{ ivm.shortMission }} <a ng-if="ivm.showMore" ng-click="ivm.expanded = !ivm.expanded">More</a></p>

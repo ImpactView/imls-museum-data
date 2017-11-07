@@ -25,7 +25,7 @@
                         <a class="back-to-results" ng-click="museum.onBackButtonClicked()"><i class="md-icon-left-big"></i></a>
                         <h1>{{ ::museum.museum.organization_new }} </h1>
                         <h5>{{ ::museum.museum | imlsAddress }}</h5>
-                        <p ng-if="museum.museum.org_miission_new">{{ ::museum.museum.org_miission_new }}</p>
+                        <imls-mission mission="museum.museum.org_miission_new"></imls-mission>
                         <imls-social-links museum="museum.museum"></imls-social-links>
                     </div>
                 </div>
