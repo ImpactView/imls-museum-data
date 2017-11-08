@@ -25,7 +25,7 @@
     function FilterController($scope, Config) {
         var layer = null;
         var filterColumn = 'ntee_org_type_new';
-        var noneName = 'None';
+        var noneName = 'All';
         var noneValue = {name: noneName, value: null};
         var table = Config.cartodb.tableName;
 
