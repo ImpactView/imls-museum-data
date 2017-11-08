@@ -1,21 +1,5 @@
 /**
- * Control to allow the user to select or draw custom ACS analysis areas on the cartodb-vis map
- *
- * Events:
- * imls:area-analysis-control:radius:changed Triggered when the radius is changed in the
- *                                           control select dropdown
- *     {Number} radius The radius selected in meters
- *
- * imls:area-analysis-control:draw:start Triggered when the user clicks on any of the custom
- *                                       draw buttons
- *     {String} drawType The button selected, currently one of 'circle'|'polygon'
- *
- * imls:area-analysis-control:draw:complete Triggered when the user finishes drawing a custom shape
- *     {Event} drawEvent The event fired by the L.Draw control, passed through
- *
- * imls:area-analysis-control:draw:cancel Listened for on scope, trigger elsewhere to clear the
- *                                        draw handler and reset the control
- *
+ * Control to allow the user to filter by the categories displayed on the cartodb-vis map
  */
 
 (function () {
