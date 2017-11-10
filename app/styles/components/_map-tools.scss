@@ -39,10 +39,24 @@
 
     .vis-layer-selector,
     .vis-draw-control {
-        padding: 10px;
-        position: absolute;
         bottom: 20px;
         right: 20px;
+    }
+
+    .vis-filter-control {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .cartodb-legend {
+        bottom: 120px !important;
+    }
+
+    .vis-layer-selector,
+    .vis-draw-control,
+    .vis-filter-control {
+        padding: 10px;
+        position: absolute;
         font-size: 13px;
         -webkit-box-shadow: rgba(0,0,0,.2) 0 0 4px 2px;
         -moz-box-shadow: rgba(0,0,0,.2) 0 0 4px 2px;
