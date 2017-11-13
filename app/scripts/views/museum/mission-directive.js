@@ -14,7 +14,7 @@
             var mission = changes.mission.currentValue;
             if (mission && mission.length) {
                 ctl.shortMission = mission.substring(0, SHORT_CHAR_LIMIT);
-                ctl.showMore = !(mission.length === ctl.shortMission.length);
+                ctl.showMore = mission.length !== ctl.shortMission.length;
                 if (ctl.showMore) {
                     ctl.shortMission = ctl.shortMission + '...';
                 }
