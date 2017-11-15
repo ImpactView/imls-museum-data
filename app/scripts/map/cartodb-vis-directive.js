@@ -6,8 +6,33 @@
 (function () {
     'use strict';
 
+    var orgPopupTemplate = [
+        '<div class="popup">',
+        '<div ng-if="loading" class="spinner">Loading...</div>',
+        '<div ng-if="!loading">',
+        '<div ng-if="rows && rows.length && rows.length > 1" class="popup-header">',
+        '<p>Found {{ rows.length }} results:</p>',
+        '</div>',
+        '<div class="popup-content">',
+        '<div class="popup-content-row" ng-repeat="row in rows">',
+        '<span class="org-type" style="background-color: {{ row.orgTypeColor }};"></span>',
+        '<a href="/#/museum/{{row.ein_new}}/">{{ row.organization_new }}</a>',
+        '</div>',
+        '</div>',
+        '</div>',
+        '</div>'
+    ].join('');
+
+    var orgPopoverTemplate = [
+        '<div>',
+        '<p>{{ orgName }}</p>',
+        '<p ng-if="resultCount === 2">1 additional organization at this location</p>',
+        '<p ng-if="resultCount > 2">{{ resultCount - 1 }} additional organizations at this location</p>',
+        '</div>'
+    ].join('');
+
     /* ngInject */
-    function VisController($attrs, $log, $q, $scope, $timeout, Config) {
+    function VisController($attrs, $log, $compile, $q, $scope, $timeout, Config, OrgCountService) {
 
         var MAP_SLIDE_TRANSITION_MS = 400;
 
@@ -28,6 +53,7 @@
         var map;
         var mapDomId = 'map';
         var demographicsVisible = false;
+        var $popover;
 
         initialize();
 
@@ -79,8 +105,29 @@
             //  tooltip-points tooltip and re-hide it as cartodbjs attempts to display it on
             //  feature over
             // Also have a check here to ensure we're listening to the points layer
-            if (layers.length >= 2 && layers[1].getSubLayers) {
-                layers[1].on('featureOver', onPointsLayerFeatureOver);
+            if (layers[1].getSubLayers) {
+                var dataLayer = layers[1];
+
+                // Setup custom popup
+                dataLayer.setInteraction(true);
+                dataLayer.setInteractivity('cartodb_id,organization_new,latitude,longitude,ntee_org_type_new');
+                dataLayer.on('featureClick', onPointsLayerClicked);
+                dataLayer.on('mouseover', function () {
+                    $('.leaflet-container').css('cursor', 'pointer');
+                });
+                dataLayer.on('mouseout', function () {
+                    $('.leaflet-container').css('cursor', 'auto');
+                });
+
+                // Setup custom popover
+                $popover = $('#vis-popover');
+                dataLayer.on('featureOver', onPointsLayerFeatureOver);
+                dataLayer.on('featureOut', onPointsLayerFeatureOut);
+
+                // Setup demographics hover interactivity
+                if (layers.length >= 2) {
+                    dataLayer.on('featureOver', onPointsLayerFeatureOverForDemographics);
+                }
             } else {
                 $log.error('vis.getLayers()[1] is not the points layer!');
             }
@@ -136,7 +183,7 @@
             }, MAP_SLIDE_TRANSITION_MS * 1.2);
         }
 
-        function onPointsLayerFeatureOver() {
+        function onPointsLayerFeatureOverForDemographics() {
             if (demographicsVisible) {
                 $('div.cartodb-tooltip .tooltip-points').parent().css('display', 'none');
             }
@@ -147,6 +194,72 @@
                 $('div.cartodb-tooltip .tooltip-tracts').parent().css('display', 'block');
             }
         }
+
+        function onPointsLayerClicked(event, latLng, pos, data) {
+            var popupScope = $scope.$new(true);
+            popupScope.loading = true;
+            makePopupAtLatLng(popupScope, latLng);
+            var client = new cartodb.SQL({user: Config.cartodb.account});
+            var sql = 'SELECT {{ fields }} FROM {{table}} ' +
+                'WHERE ST_Within(' +
+                    'ST_Transform(the_geom, 4326), ' +
+                    'ST_Buffer(ST_SetSRID(ST_MakePoint({{ x }}, {{ y }}),4326), {{ tolerance }})' +
+                ')';
+            client.execute(sql, {
+                table: Config.cartodb.tableName,
+                x: data.longitude,
+                y: data.latitude,
+                fields: ['ein_new', 'organization_new', 'ntee_org_type_new'].join(','),
+                tolerance: 0.0001
+            }).done(function (data) {
+                _.forEach(data.rows, function (row) {
+                    /* jshint camelcase:false */
+                    row.orgTypeColor = colorForOrg(row.ntee_org_type_new);
+                    /* jshint camelcase:true */
+                });
+                popupScope.rows = data.rows;
+                popupScope.loading = false;
+                makePopupAtLatLng(popupScope, latLng);
+            });
+
+            function colorForOrg(orgType) {
+                var legendData = Config.cartodb.legend.data;
+                var result = _.find(legendData, function (legendItem) {
+                    return legendItem.name === orgType;
+                });
+                return result ? result.value : '#fff';
+            }
+        }
+
+        function onPointsLayerFeatureOver(event, latLng, pos, data) {
+            var popoverScope = $scope.$new(true);
+            /* jshint camelcase:false */
+            popoverScope.orgName = data.organization_new;
+            /* jshint camelcase:true */
+            popoverScope.resultCount = OrgCountService.atLatLng(data.latitude, data.longitude);
+            var popoverHtml = $compile(orgPopoverTemplate)(popoverScope);
+            popoverScope.$apply();
+            $popover.html(popoverHtml[0]);
+            $popover.css({
+                top: pos.y + 5,
+                left: pos.x + 5
+            });
+            $popover.addClass('visible');
+        }
+
+        function onPointsLayerFeatureOut() {
+            $popover.removeClass('visible');
+        }
+
+        function makePopupAtLatLng(scope, latLng) {
+            var popupHtml = $compile(orgPopupTemplate)(scope);
+            scope.$apply();
+            L.popup({maxWidth: 400})
+                .setLatLng(latLng)
+                .setContent(popupHtml[0])
+                .openOn(map);
+        }
+
     }
 
     /* ngInject */
