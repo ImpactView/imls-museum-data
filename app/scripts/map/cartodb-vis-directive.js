@@ -103,7 +103,7 @@
             var layers = vis.getLayers();
 
             if (Config.cartodb.legend) {
-                orgLegend = new cdb.geo.ui.Legend.Category(Config.cartodb.legend);
+                orgLegend = new cdb.geo.ui.Legend(Config.cartodb.legend);
             }
             // Pretty hacky, but simpler than other options:
             //  If one of the demographics layers are visible, then we want to find the
