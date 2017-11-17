@@ -7,6 +7,7 @@
      */
     var config = [{
         title: 'Median Income ($)',
+        show_title: true,
         type: 'choropleth',
         data: [
             { value: 0 },
@@ -19,6 +20,7 @@
         ]
     }, {
         title: 'Poverty Rate (%)',
+        show_title: true,
         type: 'choropleth',
         data: [
             { value: 0 },
