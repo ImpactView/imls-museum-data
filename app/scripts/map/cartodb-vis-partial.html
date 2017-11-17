@@ -15,7 +15,7 @@
                         <input type="radio"
                                ng-model="vis.radio"
                                value="{{ $index }}"
-                               ng-change="vis.onSublayerChange(sublayer)">
+                               ng-change="vis.onSublayerChange(sublayer, $index)">
                                {{ vis.demographicsConfig[$index].title }}
                     </label>
                 </li>
@@ -35,5 +35,6 @@
     <div id="vis-popover"></div>
     <div id="map"></div>
     <div class="cartodb-fullscreen"><a ng-click="vis.onFullscreenClicked()"></a></div>
+    <div class="vis-legends"></div>
 </div> <!-- /.map-container -->
 

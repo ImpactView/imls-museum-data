@@ -21,12 +21,6 @@
     div.cartodb-tiles-loader {
         margin-top: 0;
     }
-
-    div.cartodb-legend {
-        bottom: 40px;
-        left: 20px;
-        right: auto;
-    }
 }
 
 .map-container {
@@ -39,17 +33,19 @@
 
     .vis-layer-selector,
     .vis-draw-control {
-        bottom: 20px;
+        bottom: 120px;
         right: 20px;
     }
 
     .vis-filter-control {
         bottom: 20px;
-        left: 20px;
+        right: 20px;
     }
 
-    .cartodb-legend {
-        bottom: 120px !important;
+    div.cartodb-legend-stack {
+        bottom: 20px;
+        left: 20px;
+        right: auto;
     }
 
     .vis-layer-selector,
