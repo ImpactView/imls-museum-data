@@ -16,7 +16,7 @@
                                ng-model="vis.radio"
                                value="{{ $index }}"
                                ng-change="vis.onSublayerChange(sublayer)">
-                               {{ sublayer.legend.get('title') }}
+                               {{ vis.demographicsConfig[$index].title }}
                     </label>
                 </li>
                 <li>

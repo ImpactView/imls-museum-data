@@ -32,7 +32,8 @@
     ].join('');
 
     /* ngInject */
-    function VisController($attrs, $log, $compile, $q, $scope, $timeout, Config, OrgCountService) {
+    function VisController($attrs, $log, $compile, $q, $scope, $timeout,
+                           Config, DemographicsConfig, OrgCountService) {
 
         var MAP_SLIDE_TRANSITION_MS = 400;
 
@@ -59,6 +60,7 @@
 
         function initialize() {
             ctl.demographics = !!($scope.$eval($attrs.demographics));
+            ctl.demographicsConfig = DemographicsConfig;
             ctl.drawControl = !!($scope.$eval($attrs.drawControl));
             ctl.filterControl = !!($scope.$eval($attrs.filterControl));
             ctl.visFullscreenClass = $attrs.visFullscreenClass || 'map-expanded';
