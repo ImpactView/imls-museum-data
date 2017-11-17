@@ -1,37 +1,39 @@
 <div class="map-container">
-    <div class="vis-layer-selector"
-         ng-if="vis.sublayers.length"
-         ng-mouseleave="vis.layersVisible = false">
-        <div class="vis-layer-selector-button"
-             ng-class="{ 'visible': vis.layersVisible }"
-             ng-click="vis.layersVisible = !vis.layersVisible">
-            <i class="md-icon-layers"></i><span ng-show="vis.layersVisible">Demographics</span>
+    <div class="vis-controls">
+        <div viz-filter-control ng-if="vis.filterControl"></div>
+        <div class="vis-control vis-layer-selector"
+            ng-class="{ 'visible': vis.layersVisible }"
+            ng-if="vis.sublayers.length">
+            <div class="vis-control-button"
+                ng-click="vis.layersVisible = !vis.layersVisible">
+                <i class="md-icon-layers"></i>
+                <span ng-show="vis.layersVisible">Demographics</span>
+            </div>
+            <div class="vis-control-body"
+                ng-show="vis.layersVisible">
+                <ul>
+                    <li ng-repeat="sublayer in vis.sublayers">
+                        <label>
+                            <input type="radio"
+                                ng-model="vis.radio"
+                                value="{{ $index }}"
+                                ng-change="vis.onSublayerChange(sublayer, $index)">
+                                {{ vis.demographicsConfig[$index].title }}
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio"
+                                ng-model="vis.radio"
+                                value="-1"
+                                ng-change="vis.onSublayerChange(null)"> Off
+                        </label>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="vis-layer-selector-body"
-             ng-show="vis.layersVisible">
-            <ul>
-                <li ng-repeat="sublayer in vis.sublayers">
-                    <label>
-                        <input type="radio"
-                               ng-model="vis.radio"
-                               value="{{ $index }}"
-                               ng-change="vis.onSublayerChange(sublayer, $index)">
-                               {{ vis.demographicsConfig[$index].title }}
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="radio"
-                               ng-model="vis.radio"
-                               value="-1"
-                               ng-change="vis.onSublayerChange(null)"> Off
-                    </label>
-                </li>
-            </ul>
-        </div>
+        <div area-analysis-control ng-if="vis.drawControl"></div>
     </div>
-    <div area-analysis-control class="vis-draw-control" ng-if="vis.drawControl"></div>
-    <div viz-filter-control class="vis-filter-control" ng-if="vis.filterControl"></div>
     <div id="vis-popover"></div>
     <div id="map"></div>
     <div class="cartodb-fullscreen"><a ng-click="vis.onFullscreenClicked()"></a></div>

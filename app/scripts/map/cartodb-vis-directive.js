@@ -149,10 +149,6 @@
                     $scope.$apply();
 
                     layer.on('featureOver', onDemographicsLayerFeatureOver);
-                    // Need to slide demographics control up if both draw/demographics are active
-                    if (ctl.drawControl) {
-                        $('div.vis-layer-selector').css('bottom', '140px');
-                    }
                 });
             }
 
