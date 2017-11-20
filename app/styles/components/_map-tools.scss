@@ -155,8 +155,22 @@
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-    top: 9px;
-    right: 10px;
+    top: -11px;
+    right: -10px;
+    background: white;
+    opacity: 1;
+    color: $base-darker;
+    border-radius: 100%;
+    height: 22px;
+    width: 22px;
+    padding: 0;
+    line-height: 19px;
+    box-shadow: 0 0 0 2px $base-darker;
+
+    &:hover {
+        color: white;
+        background: #3a3b3b;
+    }
 }
 
 .leaflet-popup-content-wrapper,
