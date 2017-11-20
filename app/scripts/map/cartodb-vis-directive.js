@@ -16,7 +16,7 @@
         '<div class="popup-content">',
         '<div class="popup-content-row" ng-repeat="row in rows">',
         '<span class="org-type" style="background-color: {{ row.orgTypeColor }};"></span>',
-        '<a href="/#/museum/{{row.ein_new}}/">{{ row.organization_new }}</a>',
+        '<a href="/#/organization/{{row.ein_new}}/">{{ row.organization_new }}</a>',
         '</div>',
         '</div>',
         '</div>',

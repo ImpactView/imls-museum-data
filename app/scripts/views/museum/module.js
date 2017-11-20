@@ -4,7 +4,7 @@
     /* ngInject */
     function StateConfig($stateProvider) {
         $stateProvider.state('museum', {
-            url: '/museum/:museum/',
+            url: '/organization/:museum/',
             templateUrl: 'scripts/views/museum/museum-partial.html',
             controller: 'MuseumController',
             controllerAs: 'museum'
