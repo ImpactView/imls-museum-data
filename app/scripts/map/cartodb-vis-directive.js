@@ -25,9 +25,9 @@
 
     var orgPopoverTemplate = [
         '<div>',
-        '<p>{{ orgName }}</p>',
-        '<p ng-if="resultCount === 2">1 additional organization at this location</p>',
-        '<p ng-if="resultCount > 2">{{ resultCount - 1 }} additional organizations at this location</p>',
+        '<p class="org-name">{{ orgName }}</p>',
+        '<p ng-if="resultCount === 2" class="additional-orgs">1 additional organization at this location</p>',
+        '<p ng-if="resultCount > 2" class="additional-orgs">{{ resultCount - 1 }} additional organizations at this location</p>',
         '</div>'
     ].join('');
 
