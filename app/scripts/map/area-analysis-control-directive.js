@@ -35,20 +35,23 @@
             // A 'custom' option is dynamically added to this list whenever
             //  the user draws a custom polygon
             ctl.acsRadiusOptions = [{
+                value: ONE_MILE_IN_M * 0.25,
+                label: '0.25 Mile Radius'
+            }, {
+                value: ONE_MILE_IN_M * 0.5,
+                label: '0.5 Mile Radius'
+            }, {
                 value: ONE_MILE_IN_M,
                 label: '1 Mile Radius'
             }, {
-                value: ONE_MILE_IN_M * 3,
-                label: '3 Mile Radius'
+                value: ONE_MILE_IN_M * 2.5,
+                label: '2.5 Mile Radius'
             }, {
                 value: ONE_MILE_IN_M * 5,
                 label: '5 Mile Radius'
-            }, {
-                value: ONE_MILE_IN_M * 25,
-                label: '25 Mile Radius'
             }];
-            ctl.acsRadius = ctl.acsRadiusOptions[0].value;
-            setArea(ctl.acsRadius);
+            ctl.acsRadius = ctl.acsRadiusOptions[1].value;
+            setArea(Area.circle(ctl.acsRadius));
 
             ctl._onRadiusChanged = _onRadiusChanged;
             ctl.onStartDrawPolygon = onStartDrawPolygon;

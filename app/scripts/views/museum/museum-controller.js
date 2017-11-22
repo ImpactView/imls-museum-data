@@ -11,6 +11,7 @@
 
         var LOAD_TIMEOUT_MS = 300;
         var ONE_MILE_IN_M = 1609.344;
+        var DEFAULT_RADIUS = ONE_MILE_IN_M * 0.5;
 
         var vis = null;
         var map = null;
@@ -85,7 +86,7 @@
         }
 
         function onRadiusChanged(event, radius) {
-            radius = radius || ONE_MILE_IN_M;
+            radius = radius || DEFAULT_RADIUS;
             if (!ctl.museum) { return; }
             var center = L.latLng(ctl.museum.latitude, ctl.museum.longitude);
             // Initialize charts with data in a 1 mi radius
