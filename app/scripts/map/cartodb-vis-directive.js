@@ -32,7 +32,8 @@
     ].join('');
 
     /* ngInject */
-    function VisController($attrs, $log, $compile, $q, $scope, $timeout, Config, OrgCountService) {
+    function VisController($attrs, $log, $compile, $q, $scope, $timeout,
+                           Config, DemographicsConfig, OrgCountService) {
 
         var MAP_SLIDE_TRANSITION_MS = 400;
 
@@ -54,11 +55,15 @@
         var mapDomId = 'map';
         var demographicsVisible = false;
         var $popover;
+        var orgLegend;
+        var demographicsLegend;
+        var legends;
 
         initialize();
 
         function initialize() {
             ctl.demographics = !!($scope.$eval($attrs.demographics));
+            ctl.demographicsConfig = DemographicsConfig;
             ctl.drawControl = !!($scope.$eval($attrs.drawControl));
             ctl.filterControl = !!($scope.$eval($attrs.filterControl));
             ctl.visFullscreenClass = $attrs.visFullscreenClass || 'map-expanded';
@@ -77,19 +82,20 @@
             $scope.$watch(function () { return ctl.visFullscreen; }, onVisFullscreenChanged);
         }
 
-        function onSublayerChange(sublayer) {
+        function onSublayerChange(sublayer, index) {
             angular.forEach(ctl.sublayers, function (s) {
                 s.hide();
-                //s.legend.set('visible', false);
             });
             demographicsVisible = !!(sublayer);
             if (sublayer) {
                 sublayer.show();
-                // sublayer.legend.set('visible', true);
+                demographicsLegend = new cdb.geo.ui.Legend(ctl.demographicsConfig[index]);
             } else {
+                demographicsLegend = undefined;
                 // Hide the sticky tooltip by clearing block styling...weee this is messy
                 $('div.cartodb-tooltip .tooltip-tracts').parent().css('display', 'none');
             }
+            renderLegends(orgLegend, demographicsLegend);
         }
 
         function onVisReady(vis) {
@@ -97,8 +103,7 @@
             var layers = vis.getLayers();
 
             if (Config.cartodb.legend) {
-                var legend = new cdb.geo.ui.Legend.Category(Config.cartodb.legend);
-                  $('#' + mapDomId + ' .leaflet-container').append(legend.render().el);
+                orgLegend = new cdb.geo.ui.Legend(Config.cartodb.legend);
             }
             // Pretty hacky, but simpler than other options:
             //  If one of the demographics layers are visible, then we want to find the
@@ -135,7 +140,6 @@
                 var demographicsOptions = angular.extend({}, defaultOptions, {});
                 cartodb.createLayer(map, Config.cartodb.demographicVisUrl, demographicsOptions)
                 .addTo(map).done(function (layer) {
-                    $('div.cartodb-legend').filter(':first').css('bottom', '150px');
                     ctl.sublayers = layer.getSubLayers();
                     angular.forEach(ctl.sublayers, function (sublayer) {
                         sublayer.setInteraction(true);
@@ -145,12 +149,11 @@
                     $scope.$apply();
 
                     layer.on('featureOver', onDemographicsLayerFeatureOver);
-                    // Need to slide demographics control up if both draw/demographics are active
-                    if (ctl.drawControl) {
-                        $('div.vis-layer-selector').css('bottom', '140px');
-                    }
                 });
             }
+
+            // Render legend
+            renderLegends(orgLegend, demographicsLegend);
 
             // Force museum points back to the top
             // Always layer one of the main visualization (basemap is layer zero)
@@ -258,6 +261,22 @@
                 .setLatLng(latLng)
                 .setContent(popupHtml[0])
                 .openOn(map);
+        }
+
+        function renderLegends(orgLegend, demographicsLegend) {
+            var legends = [];
+            if (orgLegend) {
+                legends.push(orgLegend);
+            }
+            if (demographicsLegend) {
+                legends.push(demographicsLegend);
+            }
+            var stackedLegend = new cdb.geo.ui.StackedLegend({
+                legends: legends
+            });
+            var $legends = $('.map-container .vis-legends');
+            $legends.empty();
+            $legends.append(stackedLegend.render().el);
         }
 
     }

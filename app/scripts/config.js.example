@@ -26,7 +26,7 @@
             tableName: 'impactviewphilly_102617',
             tractsTableName: 'philly_census_tracts_2010',
             demographicVisUrl: 'https://npecosystem.carto.com/api/v2/viz/dfa88f97-3a97-4ac5-838c-337fb912f29e/viz.json',
-            demographicVisColumns: 'cartodb_id, median_income, poverty_rate',
+            demographicVisColumns: 'cartodb_id, median_income, poverty_rate, percent_under18_percentage, percent_pop_without_hs_diploma',
             // This object should conform to the config object passed to
             //   cdb.geo.ui.Legend.Category
             // demonstrated here: https://gist.github.com/javisantana/6410678#file-index-html-L54-L61
@@ -34,6 +34,8 @@
             //   should also be updated
             legend: {
                 title: 'Organizations by Type',
+                show_title: true,
+                type: 'category',
                 data: [
                     { name: 'Human Services', value: '#5F4690'},
                     { name: 'Education', value: '#1D6996'},
