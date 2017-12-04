@@ -65,7 +65,8 @@ input.search-field + .dropdown-menu {
         cursor: pointer;
 
         strong {
-            color: $brand-primary-light;
+            color: $white;
+            text-decoration: underline;
         }
     }
 
