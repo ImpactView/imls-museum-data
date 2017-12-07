@@ -229,6 +229,11 @@
         }
     }
 
+    .cartodb-tooltip {
+        z-index: 1000;
+        border: 1px solid $base-dark;
+    }
+
     //hover tooltip
     .cartodb-tooltip-content-wrapper {
         background: $base-dark;
