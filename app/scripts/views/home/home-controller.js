@@ -7,7 +7,7 @@
      */
     /* ngInject */
     function HomeController($log, $q, $scope, $timeout,
-                            $geolocation, $state, Config, Geocoder, Museum, StateAbbrev) {
+                            $state, Config, Geocoder, Museum, StateAbbrev) {
         var ctl = this;
         var mapDfd = $q.defer();
 
@@ -24,9 +24,7 @@
                 ERROR: -1
             };
 
-            ctl.loadingGeolocation = false;
             ctl.search = search;
-            ctl.onLocationClicked = onLocationClicked;
             ctl.onSearchClicked = onSearchClicked;
             ctl.onTypeaheadSelected = onTypeaheadSelected;
             ctl.getMap = getMap;
@@ -38,27 +36,6 @@
 
         function getMap() {
             return mapDfd.promise;
-        }
-
-        function onLocationClicked() {
-            var loadingGeoTimeout = $timeout(function () { ctl.loadingGeolocation = true; }, 150);
-            $geolocation.getCurrentPosition({
-                enableHighAccuracy: true,
-                maximumAge: 0
-            }).then(function (position) {
-                return Geocoder.reverse(position.coords.longitude, position.coords.latitude);
-            }).then(function (data) {
-                requestNearbyMuseums(data.feature);
-            })
-            .catch(function (error) {
-                $log.error(error);
-                ctl.pageState = ctl.states.ERROR;
-            }).finally(function () {
-                if (loadingGeoTimeout) {
-                    $timeout.cancel(loadingGeoTimeout);
-                }
-                ctl.loadingGeolocation = false;
-            });
         }
 
         function onSearchClicked() {

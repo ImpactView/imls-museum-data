@@ -26,15 +26,6 @@
                                    typeahead-on-select="home.onTypeaheadSelected($item)"
                                    typeahead-wait-ms="300"
                                    typeahead-min-length="3" />
-                           <button type="button"
-                                class="form-control"
-                                data-toggle="tooltip"
-                                data-placement="bottom"
-                                ng-click="home.onLocationClicked()"
-                                title="Your Location">
-                                <i class="md-icon-location" ng-if="!home.loadingGeolocation"></i>
-                                <div class="preloader small margin-auto" ng-if="home.loadingGeolocation"></div>
-                            </button>
                         </div>
                         <a style="display: none;" ng-click="home.onSearchClicked()" class="btn btn-primary">Search</a>
                     </form> <!-- /form -->
