@@ -2,29 +2,40 @@
 
 	// Action bar Changes
 	.action-bar:not(.navbar) {
-		//margin-top: 0;
-		background: $base-darker;
-		padding: 0;
-		display: table;
-		width: 100%;
+        background: none;
+        padding: 0;
+        width: 100%;
         min-height: 140px;
+        color: $base;
+        border-top: 2px solid $base-light;
+        border-bottom: none;
+
+        &.fixed {
+            border-top: none;
+        }
 	}
 
 	.museum-info {
-		width: 70%;
-		display: table-cell;
-		vertical-align: middle;
-		padding: 20px 25px 20px 80px;
-		transition: .2s ease-in-out;
+        transition: .2s ease-in-out;
+        display: flex;
+        align-items: center;
+        padding: 5px 50px;
+        border-bottom: 1px solid $base;
+        background: white;
 
 		h1 {
-			margin-top: 15px;
+			margin-top: 0;
+            color: $base;
 		}
+
+        h5 {
+            color: $base;
+        }
 
 		ul:not(.social-media) {
             margin-top: 5px;
             transition: .2s ease transform;
-            transform-origin: center;
+            transform-origin: top right;
 
 			li {
 				margin-bottom: 5px;

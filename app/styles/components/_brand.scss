@@ -12,4 +12,16 @@
     img {
         max-width: 100%;
     }
+
+    &:after {
+        content: 'beta';
+        position: absolute;
+        font-size: 13px;
+        font-size: 1.1rem;
+        right: 0;
+        top: 8px;
+        color: black;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
 }

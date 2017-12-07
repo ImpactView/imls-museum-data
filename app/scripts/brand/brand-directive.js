@@ -7,7 +7,7 @@
         var template = '' +
             '<div class="brand">' +
                 '<a class="logo" ui-sref="{{ ::brandLink }}" ui-sref-opts="{reload: true}">' +
-                    '<img src="/images/impact-view-logo-white.png" >' +
+                    '<img src="/images/impact-view-logo.png" >' +
                 '</a>' +
             '</div>';
         var module = {

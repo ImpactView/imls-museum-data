@@ -65,11 +65,16 @@ input.search-field + .dropdown-menu {
         cursor: pointer;
 
         strong {
-            color: $brand-primary-light;
+            text-decoration: underline;
+            font-style: italic;
         }
     }
 
     .active > a {
         color: $white;
+
+        strong {
+            color: $white;
+        }
     }
 }

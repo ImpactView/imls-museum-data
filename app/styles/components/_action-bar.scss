@@ -1,16 +1,13 @@
 .action-bar {
-	color: $white;
-	background: $base-darker;
-	padding-top: 30px;
-	padding-bottom: 30px;
+	background-color: $white;
+	color: $base-darker;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	position: relative;
 	z-index: 1000;
     width: 100%;
-	@include font-size(14);
-
-	h1, h2, h3, p {
-		color: $white;
-	}
+    border-bottom: 1px solid $base;
+    @include font-size(14);
 
 	h1 {
 		margin-top: 3px;
@@ -26,7 +23,6 @@
 	}
 
 	h5 {
-		color: $white;
 		text-transform: uppercase;
 		font-weight: 600;
 		letter-spacing: .5px;
