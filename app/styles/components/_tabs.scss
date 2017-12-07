@@ -1,7 +1,7 @@
 .nav.nav-tabs li {
 
 	a {
-		@include font-size(24);
+		@include font-size(20);
 		text-transform: uppercase;
 		color: lighten($base, 10%);
 		letter-spacing: 4px;
