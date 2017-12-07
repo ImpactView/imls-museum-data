@@ -43,7 +43,7 @@
                     <td>{{ ::row.organization_new }}</td>
                     <td>{{ ::row.ntee_org_type_new }}</td>
                     <td>{{ ::row.org_size_label_new }}</td>
-                    <td><a href="http://{{ ::row.org_website_new }}">{{ ::row.org_website_new }}</a></td>
+                    <td><a href="{{ ::row.org_website_new }}">{{ ::row.org_website_new }}</a></td>
                     <td><a ui-sref="museum({ museum: row.ein_new })" class="btn btn-primary-ghost">View &amp; Analyze</a></td>
                 </tr>
             </tbody>
