@@ -83,11 +83,7 @@
                 $log.error(error);
             }
             homeCtl.getMap().then(function (map) {
-                var bounds = [
-                    [Config.bounds.southWest.lat, Config.bounds.southWest.lng],
-                    [Config.bounds.northEast.lat, Config.bounds.northEast.lng]
-                ];
-                map.fitBounds(bounds);
+                map.setView(Config.homeCenter, Config.homeZoom);
             });
         }
 
