@@ -19,7 +19,8 @@
     }
 
     div.cartodb-tiles-loader {
-        margin-top: 0;
+        // 20px spacing from bottom of fullscreen control
+        margin-top: 53px;
     }
 }
 
@@ -135,11 +136,11 @@
 }
 
 .cartodb-fullscreen {
-    // Cannot go below the zoom control, that's where the loading spinner lives
     position: absolute;
     display: block;
-    top: 10px;
-    left: 0;
+    // 20px below zoom control
+    top: 86px;
+    right: 20px;
 
     a {
         // override default transition for a tags set in _base.scss
@@ -226,6 +227,11 @@
             border: none;
             opacity: .8;
         }
+    }
+
+    .cartodb-tooltip {
+        z-index: 1000;
+        border: 1px solid $base-dark;
     }
 
     //hover tooltip

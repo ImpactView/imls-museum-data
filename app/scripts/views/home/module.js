@@ -23,11 +23,9 @@
             controller: 'SearchController',
             controllerAs: 'search'
         });
-
     }
 
     angular.module('imls.views.home', [
-        'ngGeolocation',
         'smart-table',
         'ui.router',
         'ui.bootstrap',

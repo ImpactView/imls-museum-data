@@ -10,7 +10,6 @@
     "angular-bootstrap": "2.5.0",
     "leaflet-draw": "0.2.4",
     "lodash": "3.10.1",
-    "ngGeolocation": "0.0.8",
     "angular-smart-table": "2.1.8",
     "nvd3": "1.8.6",
     "angular-resize": "1.0.0"
