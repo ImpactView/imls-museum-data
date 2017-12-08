@@ -196,16 +196,29 @@
 }
 
 .popup-content-row {
-    padding: .7rem 0;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    padding: 1rem 0;
 
-    .org-type {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 10px;
-        margin-right: 10px;
-        flex: none;
+    &:not(:last-child) {
+        border-bottom: 1px solid $base;
+    }
+
+    .popup-content-row-line {
+        display: flex;
+        align-items: center;
+
+        .details {
+            margin-left: auto;
+        }
+
+        .org-type {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 10px;
+            margin-right: 10px;
+            flex: none;
+        }
     }
 }
 
