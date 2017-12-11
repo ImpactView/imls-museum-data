@@ -208,16 +208,20 @@
         display: flex;
         align-items: center;
 
-        .details {
-            margin-left: auto;
-        }
-
         .org-type {
             width: 1rem;
             height: 1rem;
             border-radius: 10px;
-            margin-right: 10px;
+            margin-right: 1rem;
             flex: none;
+        }
+
+        .name {
+            margin-right: 1rem;
+        }
+
+        .details {
+            margin-left: auto;
         }
     }
 }
