@@ -9,7 +9,7 @@
         censusApi: {
             key: 'add your API key here'
         },
-        bounds: {
+        searchBounds: {
             northEast: {
                 lat: 40.137992,
                 lng: -74.955763
@@ -19,6 +19,8 @@
                 lng: -75.280266
             }
         },
+        homeCenter: [39.965797, -75.155198],
+        homeZoom: 12,
         detailZoom: 14,
         cartodb: {
             visId: '08f82c62-7824-48a3-a039-53b303bff0ff',

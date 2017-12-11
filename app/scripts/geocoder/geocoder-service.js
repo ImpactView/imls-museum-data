@@ -10,10 +10,10 @@
         var suggestUrl = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest';
         var reverseUrl = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode';
         var boundingBox = [
-            Config.bounds.southWest.lng,
-            Config.bounds.southWest.lat,
-            Config.bounds.northEast.lng,
-            Config.bounds.northEast.lat
+            Config.searchBounds.southWest.lng,
+            Config.searchBounds.southWest.lat,
+            Config.searchBounds.northEast.lng,
+            Config.searchBounds.northEast.lat
         ].join(',');
         var maxResults = 10;
         var sourceCountry = 'USA';
