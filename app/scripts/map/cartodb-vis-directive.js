@@ -7,20 +7,27 @@
     'use strict';
 
     var orgPopupTemplate = [
-        '<div class="popup">',
+    '<div class="popup">',
         '<div ng-if="loading" class="spinner">Loading...</div>',
         '<div ng-if="!loading">',
-        '<div ng-if="rows && rows.length && rows.length > 1" class="popup-header">',
-        '<p>Found {{ rows.length }} results:</p>',
+            '<div ng-if="rows && rows.length && rows.length > 1" class="popup-header">',
+                '<p>Found {{ rows.length }} results:</p>',
+            '</div>',
+            '<div class="popup-content">',
+                '<div class="popup-content-row" ng-repeat="row in rows">',
+                    '<div class="popup-content-row-line">',
+                        '<span class="org-type" style="background-color: {{ row.orgTypeColor }};"></span>',
+                        '<span class="name">{{ row.organization_new }}</span>',
+                        '<a class="details" href="/#/organization/{{row.ein_new}}/">Analyze</a>',
+                    '</div>',
+                    '<div class="popup-content-row-line" ng-if="row.org_size_label_new">',
+                        '<span class="org-type"></span>',
+                        '<span>{{ row.org_size_label_new }}</span>',
+                    '</div>',
+                '</div>',
+            '</div>',
         '</div>',
-        '<div class="popup-content">',
-        '<div class="popup-content-row" ng-repeat="row in rows">',
-        '<span class="org-type" style="background-color: {{ row.orgTypeColor }};"></span>',
-        '<a href="/#/organization/{{row.ein_new}}/">{{ row.organization_new }}</a>',
-        '</div>',
-        '</div>',
-        '</div>',
-        '</div>'
+    '</div>'
     ].join('');
 
     var orgPopoverTemplate = [
@@ -57,7 +64,6 @@
         var $popover;
         var orgLegend;
         var demographicsLegend;
-        var legends;
 
         initialize();
 
@@ -115,7 +121,7 @@
 
                 // Setup custom popup
                 dataLayer.setInteraction(true);
-                dataLayer.setInteractivity('cartodb_id,organization_new,latitude,longitude,ntee_org_type_new');
+                dataLayer.setInteractivity('cartodb_id,organization_new,org_size_label_new,latitude,longitude,ntee_org_type_new');
                 dataLayer.on('featureClick', onPointsLayerClicked);
                 dataLayer.on('mouseover', function () {
                     $('.leaflet-container').css('cursor', 'pointer');
@@ -212,7 +218,12 @@
                 table: Config.cartodb.tableName,
                 x: data.longitude,
                 y: data.latitude,
-                fields: ['ein_new', 'organization_new', 'ntee_org_type_new'].join(','),
+                fields: [
+                    'ein_new',
+                    'organization_new',
+                    'org_size_label_new',
+                    'ntee_org_type_new'
+                ].join(','),
                 tolerance: 0.0001
             }).done(function (data) {
                 _.forEach(data.rows, function (row) {
