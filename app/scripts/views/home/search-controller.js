@@ -26,6 +26,15 @@
             var zip = $stateParams.zip || '';
             ctl.nearText = zip || city || state;
 
+            if ($stateParams.lat && $stateParams.lon) {
+                homeCtl.getMap().then(function (map) {
+                    addLocationMarker(map, {
+                        x: $stateParams.lon,
+                        y: $stateParams.lat
+                    });
+                });
+            }
+
             if (city || state || zip) {
                 requestNearbyMuseums(Museum.listByCity, {
                     city: city,
@@ -35,6 +44,20 @@
             } else {
                 setErrorState();
             }
+        }
+
+        function addLocationMarker(map, position) {
+            var icon = L.icon({
+                iconUrl: 'images/map-marker-icon.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+            });
+            var marker = L.marker([position.y, position.x], {
+                clickable: false,
+                keyboard: false,
+                icon: icon
+            });
+            marker.addTo(map);
         }
 
         function onDownloadRowClicked() {
