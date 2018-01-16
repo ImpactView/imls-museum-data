@@ -18,7 +18,7 @@
         });
         $stateProvider.state('search', {
             parent: 'home',
-            url: '/search?city&state&zip',
+            url: '/search?city&state&zip&lat&lon',
             templateUrl: 'scripts/views/home/search-partial.html',
             controller: 'SearchController',
             controllerAs: 'search'

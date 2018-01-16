@@ -99,6 +99,10 @@
                 // Explicitly set undefined for missing attributes, as this resets the $stateParam
                 return feature.attributes[v] || undefined;
             });
+            if (feature.location && feature.location.x && feature.location.y) {
+                attributes.lat = feature.location.y;
+                attributes.lon = feature.location.x;
+            }
             $state.go('search', attributes);
         }
     }
