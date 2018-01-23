@@ -1,5 +1,9 @@
 <div class="vis-control vis-draw-control" ng-class="{'visible': aac.open}">
-    <div class="vis-control-button" ng-click="aac.open = !aac.open">
+    <div class="vis-control-button"
+         ng-click="aac.open = !aac.open"
+         uib-tooltip="Change Analysis Area"
+         tooltip-placement="left"
+         tooltip-enable="!aac.open">
         <i class="md-icon-polygon-draw"></i><span ng-show="aac.open">Analysis Area: {{ aac.area }} sq. miles</span>
     </div>
     <div class="vis-control-body" ng-show="aac.open">
