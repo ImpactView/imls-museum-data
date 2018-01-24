@@ -5,7 +5,10 @@
             ng-class="{ 'visible': vis.layersVisible }"
             ng-if="vis.sublayers.length">
             <div class="vis-control-button"
-                ng-click="vis.layersVisible = !vis.layersVisible">
+                ng-click="vis.layersVisible = !vis.layersVisible"
+                uib-tooltip="Apply Demographic Layers"
+                tooltip-placement="left"
+                tooltip-enable="!vis.layersVisible">
                 <i class="md-icon-layers"></i>
                 <span ng-show="vis.layersVisible">Demographics</span>
             </div>
@@ -36,7 +39,6 @@
     </div>
     <div id="vis-popover"></div>
     <div id="map"></div>
-    <div class="cartodb-fullscreen"><a ng-click="vis.onFullscreenClicked()"></a></div>
+    <div class="cartodb-fullscreen" uib-tooltip="Expand map view" tooltip-placement="left"><a ng-click="vis.onFullscreenClicked()"></a></div>
     <div class="vis-legends"></div>
 </div> <!-- /.map-container -->
-

@@ -15,7 +15,7 @@
                             role="menu"
                             aria-labelledby="dropdownMenu1">
                             <li role="menuitem"><a ng-click="search.onDownloadRowClicked()">Search Results</a></li>
-                            <li role="menuitem"><a href="https://docs.google.com/spreadsheets/d/1FvaelATp9skACO8jYE8UJX4xWoZpYgmx042rnzPfPZw/edit" target="_blank">Download Organization Data</a></li>
+                            <li role="menuitem"><a href="https://docs.google.com/spreadsheets/d/1FvaelATp9skACO8jYE8UJX4xWoZpYgmx042rnzPfPZw/edit" target="_blank">All Organizations</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="container-fluid" ng-if="home.pageState === home.states.ERROR">
             <img class="museum-icon" src="/images/museum-icon.svg">
-            <h3>Sorry, your search has returned no museums. <br> Please refine your search.</h3>
+            <h3>Sorry, your search has returned no organizations. <br> Please refine your search.</h3>
         </div>
         <table st-table="search.safeList" st-safe-src="search.list" ng-if="home.pageState === home.states.LIST" class="table table-striped">
             <thead>

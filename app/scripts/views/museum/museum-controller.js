@@ -43,6 +43,12 @@
             $scope.$on('imls:area-analysis-control:draw:complete', onDrawCreated);
 
             resize($scope).call(ACSGraphs.updateCharts);
+
+            // Sometimes this view doesn't start at the top of the window when navigated to
+            // It's unclear what triggers cause this, as one user reliably reproduces on MacOS
+            // plus Chrome, but another with the same setup could not, but was able to intermittently
+            // reproduce in Safari.
+            $window.scrollTo(0, 0);
         }
 
         function onVisReady(event, newVis, newMap) {
